@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2018
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "UnivAmravati_DMS_ForOswal", "http://localhost:54461", "{0C1227EB-9FD1-4B26-8E79-BE814384205E}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_54461"
+		Debug.AspNetCompiler.PhysicalPath = "..\UnivAmravati_DMS_ForOswal\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_54461\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_54461"
+		Release.AspNetCompiler.PhysicalPath = "..\UnivAmravati_DMS_ForOswal\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_54461\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "..\UnivAmravati_DMS_ForOswal\"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C1227EB-9FD1-4B26-8E79-BE814384205E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C1227EB-9FD1-4B26-8E79-BE814384205E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6B1CF549-926F-4E45-AA01-ADC413FC4F52}
+	EndGlobalSection
+EndGlobal

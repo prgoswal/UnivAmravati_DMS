@@ -1,0 +1,300 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MainMaster.master.cs" Inherits="MainMaster" %>
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <title>Amravati University</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- Bootstrap theme -->
+    <link href="bootstrap-3.3.6-dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
+    <!-- Custom styles for this template -->
+    <link href="bootstrap-3.3.6-dist/css/mycss.css" rel="stylesheet" type="text/css" />
+    <link href="bootstrap-3.3.6-dist/css/header.css" rel="stylesheet" type="text/css" />
+    <%-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />--%>
+    <link href="bootstrap-3.3.6-dist/css/jquery.alerts.css" rel="stylesheet" />
+    <script src="bootstrap-3.3.6-dist/js/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <%--<script src="bootstrap-3.3.6-dist/js/numberonly.js" type="text/javascript"></script>--%>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <%--<link rel="stylesheet" href="/resources/demos/style.css">--%>
+
+    <%--  <script src="bootstrap-3.3.6-dist/js/bootstrap.js"></script>
+    <script src="bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>--%>
+
+    <script type='text/javascript'>
+        function KeyPress(e) {
+            if (e != undefined) {
+                var evtobj = window.event ? event : e
+                if (evtobj.shiftKey) {
+                    getKeyValue(evtobj)
+                }
+            }
+        }
+
+        function getKeyValue(e) {
+            debugger
+            var ListOfLi, Default, dataKey, parentLI, parentA;
+            ListOfLi = document.getElementsByTagName("a");
+            Default = document.getElementsByTagName("a").item("data-");
+            for (var i = 0; i < ListOfLi.length; i++) {
+                dataKey = ListOfLi[i].getAttribute("data-sKey");
+
+                if (dataKey != null) {
+                    if (e.shiftKey && e.ctrlKey && e.key) {
+
+                    }
+                    if (e.key == dataKey) {
+                        parentLI = ListOfLi[i].parentElement.getElementsByTagName("li");
+                        parentA = parentLI.length;
+                        ListOfLi[i].setActive;
+                        ListOfLi[i].focus();
+                        ListOfLi[i].click();
+                        return;
+                    }
+                }
+            }
+        }
+        document.onkeypress = KeyPress;
+    </script>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+
+<body oncontextmenu="return false;" style="overflow-x: hidden;" oncopy="return false;" onpast="return false;" oncut="return false;">
+    <form id="form1" runat="server" class="form-horizontal" style="overflow-x: hidden; min-height: 609px;">
+        <p style="display: none">
+            Master Page Date:
+        <input type="text" id="txtdatepicker">
+        </p>
+        <div class="page-header">
+            <h3 class="header-title text-center" style="font-family: Calibri; padding: 11px 15px 0 0px !important;">Sant Gadge Baba Amravati University
+                <br />
+                <span style="font-size: 29px;">Document Management System</span>
+            </h3>
+
+        </div>
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>
+        <div class="navbar navbar-default" role="navigation">
+            <asp:Panel runat="server" ID="panelAdmin">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".menu2">
+                            <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span
+                                class="icon-bar"></span><span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="navbar-collapse collapse menu2">
+                        <ul class="nav navbar-nav">
+                            <li><a href="Home.aspx"><i class="fa fa-home"></i>&nbsp;Home</a></li>
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-skey="!"><i class="fa fa-keyboard-o"></i>&nbsp;Entry<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown" data-skey="M">Master</a>
+                                        <ul class="dropdown-menu">
+                                            <li id="ExamMaster" runat="server"><a href="ExamMaster.aspx" data-skey="E">Exam Entry</a></li>
+                                            <li><a href="UserLevelMaster.aspx" data-skey="L">Level Creation</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown" data-skey="R">Registration Number</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="RegisterMaster.aspx?PageInd=1" data-skey="G">Generate</a></li>
+                                            <li><a href="RegisterMaster.aspx?PageInd=2" data-skey="C">Cancellation</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">User Creation</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="UserCreation.aspx">User Creation</a></li>
+                                            <li><a href="UserLockingUnlocking.aspx">User Unlocking</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="matrix.aspx">User Authority</a></li>
+                                    <li><a href="FrmImageInsertion.aspx">Image Insertion</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" data-skey="@"><i class="fa fa-print"></i>&nbsp;Meta Data<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="MovePhotos.aspx">Image Move</a></li>
+                                    <li><a href="FrmLotAllotment.aspx">Lot Allotment</a></li>
+                                    <li><a href="ImgViewer_New.aspx">Meta Data Entry</a></li>
+                                    <li><a href="FrmMetaDataEntry.aspx">Meta Data Entry Demo</a></li>
+                                    <li><a href="ImageViwer.aspx">Image Viewer</a> </li>
+                                    <li><a href="FrmInsertDataPending.aspx">Foil and CF Image Show</a> </li>
+                                    <li><a href="FrmTotalEntryCount.aspx">Total No. of Records</a> </li>
+                                    <li class="hidden"><a href="BothImgsShow.aspx">Foil and CF Image old</a> </li>
+                                    <li><a href="FrmDMSUpdatePage.aspx">Update Page</a></li>
+                                    <li><a href="FrmRenamePageNo.aspx">Rename Page No &nbsp;&nbsp;<span class="badge">New</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" data-skey="@"><i class="fa fa-print"></i>&nbsp;Data Mapping<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="FrmFileUploadTextFormat.aspx">File Upload</a></li>
+                                    <li><a href="frmFacultyMapping.aspx">Faculty Mapping</a></li>
+                                    <li><a href="frmExamMapping.aspx">Exam Mapping</a></li>
+                                    <li><a href="frmRollNumberMapping.aspx">Roll Number Mapping</a></li>
+                                    <li><a href="frmExtraExamMapping.aspx">Extra Exam Mapping</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" data-skey="#"><i class="fa fa-print"></i>&nbsp;Report<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">MIS</a>
+                                        <ul class="dropdown-menu">
+                                            <li id="Li1"><a href="TrRegisterReport.aspx">Tr Register Report</a></li>
+                                            <li id="Li2"><a href="Reports.aspx">Register Report</a></li>
+                                            <li id="Li3"><a href="RptFoilCFValidity.aspx">Report Foil/CF Validity</a></li>
+                                            <li id="Li4"><a href="FrmErrorValidity.aspx">Report Error Validity</a></li>
+                                            <li><a href="RptDailyWorkReport.aspx">Daily Work Reports</a></li>
+                                            <li><a href="RptLotAllotment.aspx">Entry And Validity Reports</a></li>
+                                            <li><a href="RptExamWisePunchedRec.aspx">Exam Wise Punched Records</a></li>
+                                            <li><a href="RptMissingLots.aspx">Missing Lots Report</a></li>
+                                            <li><a href="RptDataValidity.aspx">Data Validity Report</a></li>
+                                            <li><a href="RptRegisterStatus.aspx">Alloted Lot Status Report</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="FrmDMSSearchRollNo.aspx" data-skey="$"><i class="fa fa-home"></i><span class="glyphicon glyphicon-search"></span>&nbsp;Search</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" data-skey="%"><i
+                                class="fa fa-user"></i>&nbsp;&nbsp;User :<asp:Label runat="server" ID="lblUserName"></asp:Label><b
+                                    class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="ChangePassword.aspx">Edit Profile</a></li>
+                                    <%--<li><a href="UserLogin.aspx">Logout</a></li>--%>
+                                    <li>
+                                        <asp:LinkButton runat="server" ID="lnkLogOut" Text="Logout" OnClick="lnkLogOut_Click"></asp:LinkButton></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--/.nav-collapse -->
+                </div>
+            </asp:Panel>
+            <asp:Panel runat="server" ID="panelEntryLevel">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".menu2">
+                            <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span
+                                class="icon-bar"></span><span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="navbar-collapse collapse menu2">
+                        <ul class="nav navbar-nav">
+                            <li><a href="Home.aspx"><i class="fa fa-home"></i>&nbsp;Home</a></li>
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                                class="fa fa-keyboard-o"></i>&nbsp;Entry<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <%--<li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                Master</a>
+                                <ul class="dropdown-menu">
+                                    <li id="Li1"><a href="ExamMaster.aspx">Exam Entry</a></li>
+                                </ul>
+                            </li>--%>
+                                    <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Meta Data Entry</a>
+                                        <ul class="dropdown-menu">
+                                            <%--<li><a href="RegisterMaster.aspx?PageInd=1">Generate</a></li>--%>
+                                            <%--  <li><a href="ImgViewer_New.aspx?Value=1">1st Allotted </a></li>--%>
+
+                                            <li><a href="FrmMetaDataEntry.aspx">1st Allotted</a></li>
+                                            <li><a href="ImgViewer_New.aspx?Value=2">2nd Allotted</a></li>
+                                            <li><a href="FrmTotalEntryCount.aspx">Total No. of Records</a> </li>
+                                        </ul>
+                                    </li>
+                                    <%-- <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">User
+                                        Creation</a> </li>--%>
+                                </ul>
+                            </li>
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                                class="fa fa-print"></i>&nbsp;&nbsp;Report<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">MIS</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                                class="fa fa-user"></i>&nbsp;&nbsp;User :<asp:Label runat="server" ID="lblUser"></asp:Label><b
+                                    class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="ChangePassword.aspx">Edit Profile</a></li>
+                                    <%--<li><a href="UserLogin.aspx">Logout</a></li>--%>
+                                    <li>
+                                        <asp:LinkButton runat="server" ID="LinkButton1" Text="Logout" OnClick="lnkLogOut_Click"></asp:LinkButton></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--/.nav-collapse -->
+                </div>
+                <%--  </ContentTemplate>
+            </asp:UpdatePanel>--%>
+            </asp:Panel>
+            <asp:Panel runat="server" ID="PanelOther">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".menu2">
+                            <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span
+                                class="icon-bar"></span><span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="navbar-collapse collapse menu2">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                                class="fa fa-print"></i>&nbsp;&nbsp;Report<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">MIS</a>
+                                        <ul class="dropdown-menu">
+                                            <%--<li id="Li4"><a href="TrRegisterReport.aspx">Tr Register Report</a></li>--%>
+                                            <li id="Li5"><a href="Reports.aspx">Report</a></li>
+                                            <li id="Li6"><a href="RptFoilCFValidity.aspx">Report Foil/CF Validity</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                                class="fa fa-user"></i>&nbsp;&nbsp;User :<asp:Label runat="server" ID="Label1"></asp:Label><b
+                                    class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="ChangePassword.aspx">Edit Profile</a></li>
+                                    <%--<li><a href="UserLogin.aspx">Logout</a></li>--%>
+                                    <li>
+                                        <asp:LinkButton runat="server" ID="LinkButton2" Text="Logout" OnClick="lnkLogOut_Click"></asp:LinkButton></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--/.nav-collapse -->
+                </div>
+                <%--  </ContentTemplate>
+            </asp:UpdatePanel>--%>
+            </asp:Panel>
+        </div>
+        <%--<asp:Label runat="server" ID="lblUserType" Visible="false"></asp:Label>--%>
+        <div class="container-fluid">
+            <div class="master-wrapper">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+    </form>
+    <script src="bootstrap-3.3.6-dist/js/jquery.min.js" type="text/javascript"></script>
+    <script src="bootstrap-3.3.6-dist/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="bootstrap-3.3.6-dist/js/script.js" type="text/javascript"></script>
+    <%--<script src="bootstrap-3.3.6-dist/js/jquery-1.9.0.js"></script>--%>
+    <script src="bootstrap-3.3.6-dist/js/jquery-migrate-1.2.1.js"></script>
+    <script src="bootstrap-3.3.6-dist/js/jquery.ui.draggable.js"></script>
+    <script src="bootstrap-3.3.6-dist/js/jquery.alerts.js"></script>
+</body>
+<!--Java Script-->
+</html>
