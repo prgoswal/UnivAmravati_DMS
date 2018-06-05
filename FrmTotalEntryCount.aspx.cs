@@ -69,4 +69,48 @@ public partial class FrmTotalEntryCount : System.Web.UI.Page
         }
        
     }
+     public void BindGrids()
+    {
+        try
+        {
+            cmd = new SqlCommand("SpReport", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@ind", 6);
+            //cmd.Parameters.AddWithValue("@RptInd", 0);
+            dt = new DataTable();
+            da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+
+                if (Session["UserId"].ToString() != "1")
+                {
+                    DataView dv = new DataView(dt);
+                    dv.RowFilter = " UserID=" + Session["UserId"].ToString();
+                    dt1 = new DataTable();
+                    dt1 = dv.ToTable();
+                    int sum = dt1.AsEnumerable().Sum(row => row.Field<int>("Cnt"));
+                    lblCount.Text = "Total No. of Records :- " + sum.ToString();
+                    dt1.Columns.Remove("UserID");
+                    dt1.Columns.Remove("TotalRecords");
+                    grdEntry.DataSource = dt1;
+                    grdEntry.DataBind();
+
+                }
+                else
+                {
+                    lblCount.Text = "Total No. of Records :- " + dt.Rows[0]["TotalRecords"].ToString();
+                    dt.Columns.Remove("UserID");
+                    dt.Columns.Remove("TotalRecords");
+                    grdEntry.DataSource = dt;
+                    grdEntry.DataBind();
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            lblmsg.Text = ex.Message;
+        }
+       
+    }
 }
