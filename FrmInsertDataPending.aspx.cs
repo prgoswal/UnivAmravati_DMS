@@ -589,6 +589,163 @@ public partial class FrmInsertDataPending : System.Web.UI.Page
         }
 
     }
+    
+      void UpdateDatad()
+    {
+        if (txtRollNoFrom.Text == "")
+        {
+            lblmsg.Text = "Please Enter Page Roll From";
+            txtRollNoFrom.Focus();
+            return;
+        }
+        else if (txtRollNoTo.Text == "")
+        {
+            lblmsg.Text = "Please Enter Page Roll To";
+            txtRollNoTo.Focus();
+            return;
+        }
+        else if (Convert.ToInt32(txtRollNoTo.Text) < Convert.ToInt32(txtRollNoFrom.Text))
+        {
+            lblmsg.Text = "Roll No From Must Be Less Than of Roll No To";
+            txtRollNoFrom.Focus();
+            return;
+        }
+        int insrtImg = 0;
+        lblmsg.Text = "";
+        lblmsgCF.Text = "";
+        plImg.Ind = 4;
+        plImg.RegNo = Convert.ToInt64(txtRegNo.Text);// Convert.ToInt64(Session["RegNo"]);
+        plImg.CurrentPageNo = Convert.ToInt32(txtPageNo.Text);//Convert.ToInt32(Session["PageNo"]);
+        i = dlImg.DeletePageNoData(plImg);
+
+        long IstRollNo = 0; long LastRollNo = 0;
+        frollno = 1;
+
+        if (i >= 0)
+        {
+            try
+            {
+                if (grdEntry.Rows.Count > 0)
+                {
+                    for (int k = 0; k < grdEntry.Rows.Count; k++)
+                    {
+                        if (frollno == 1)
+                        {
+                            IstRollNo = Convert.ToInt64(grdEntry.Rows[k].Cells[1].Text);
+                        }
+                        if (grdEntry.Rows.Count == frollno)
+                        {
+                            LastRollNo = Convert.ToInt64(grdEntry.Rows[k].Cells[1].Text);
+                        }
+
+                        plImg.Ind = 1;
+                        plImg.RegNo = Convert.ToInt64(RegNoFoil.Value);
+                        plImg.RollNo = Convert.ToInt64(grdEntry.Rows[k].Cells[1].Text);
+                        plImg.SName = grdEntry.Rows[k].Cells[2].Text.ToUpper();
+                        plImg.FilePath = FilePathImg.Value;
+                        plImg.CompletedPages = Convert.ToInt32(txtPageNo.Text);//Session["PageNo"]);
+                        plImg.TotalPages = 0;
+                        plImg.ErrorMark = 0;
+                        plImg.IpAddress = Request.UserHostAddress;
+                        plImg.UserId = Convert.ToInt32(Session["UserId"]);
+                        plImg.CreationDate = Convert.ToDateTime(DateTime.Now.Date);                           
+                        plImg.AllotmentNo = 1;
+                        plImg.EntryByRegNo = Convert.ToInt64(txtRegNo.Text);//Session["RegNo"]);
+                        plImg.IsUpdated = 1;
+                        plImg.UpdatedBy = Convert.ToInt32(Session["UserId"]);
+                        plImg.UpdationDate = DateTime.Now;
+                        plImg.PhyPageno = Convert.ToInt32(txtPageNo.Text);//Session["PageNo"]);
+                        plImg.verifydata = verify;
+                        insrtImg = dlImg.InserImgEntry(plImg);
+                        frollno++;
+
+                        if (insrtImg >= 0)
+                        {
+                            //lblmsg.Text = "Foil Page Entry Completed";
+                            lblInd.Text = "1";
+                            // btnSave.Enabled = false;
+                            btnAdd.Enabled = false;
+                            btnSearchImg.Enabled = true;//22122016
+                            // pnlCf.Visible = false;
+                        }
+                        else
+                        {
+                            lblmsg.Text = "Roll No. - " + plImg.RollNo + " Is Already Exists";
+                            return;
+                        }
+                    }
+                    ViewState["AvailablePages"] = null;
+                    grdEntry.DataSource = ViewState["grdEntry"] = null;
+                    grdEntry.DataBind();
+                }
+                else
+                {
+                    lblmsg.Text = "Please Create Entry First";
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                lblmsg.Text = ex.Message;
+            }
+
+            try
+            {
+                ////Update Data Into Summary Table
+                plImg.Ind = 12;
+                plImg.RegNo = Convert.ToInt64(RegNoFoil.Value);
+                plImg.PhyPageno = Convert.ToInt32(txtPageNo.Text);
+                plImg.RollNoFrom = Convert.ToInt64(IstRollNo);
+                plImg.RollNoTo = Convert.ToInt64(LastRollNo);
+                plImg.FilePath = FilePathImg.Value;
+                insrtImg = dlImg.InsertFoilImgEntryPageWise(plImg);
+
+
+                plImg.Ind = 3;
+                plImg.RegNo = Convert.ToInt64(RegNoCF.Value);
+                plImg.RollNoFrom = Convert.ToInt64(txtRollNoFrom.Text);
+                plImg.RollNoTo = Convert.ToInt64(txtRollNoTo.Text);
+                //plImg.SName = grdEntry.Rows[k].Cells[2].Text;
+                plImg.FilePath = FilePathImgCF.Value;
+                plImg.CompletedPages = Convert.ToInt32(txtPageNo.Text);//Session["PageNo"]);
+                plImg.TotalPages = 0;
+                plImg.ErrorMark = 0;
+                plImg.IpAddress = Request.UserHostAddress;
+                plImg.UserId = Convert.ToInt32(Session["UserId"]);
+                plImg.CreationDate = Convert.ToDateTime(DateTime.Now.Date);
+                plImg.AllotmentNo = 1;
+                plImg.EntryByRegNo = Convert.ToInt64(txtRegNo.Text);//Session["RegNo"]);
+                plImg.IsUpdated = 1;
+                plImg.UpdatedBy = Convert.ToInt32(Session["UserId"]);
+                plImg.UpdationDate = DateTime.Now;
+                plImg.PhyPageno = Convert.ToInt32(txtPageNo.Text);//Session["PageNo"]);
+                plImg.verifydata = verify;
+                i = dlImg.InsertCFImgEntry(plImg);
+                if (i > 0)
+                {
+                    lblInd.Text = "2";
+                    //lblmsgCF.Text = "Counter Foil Page Entry Completed";
+                    pnlImageViewer.Visible = false;
+                    lblDetails.Text = "Data Updated Succesfullly";
+                 
+                }
+                else
+                    lblmsgCF.Text = "Counter Foil Page Entry Not Cumpleted";
+           
+                txtRollNoFrom.Text = "";
+                txtRollNoTo.Text = "";
+            }
+
+            catch (Exception ex)
+            {
+                lblmsgCF.Text = ex.Message;
+            } 
+            
+            clear();
+            pnlImageViewer.Visible = false;
+        }
+
+    }
     void CheckedBound(List<int> LstCBChecked)
     {
         foreach (int item in LstCBChecked)
